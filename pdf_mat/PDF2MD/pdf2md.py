@@ -5,6 +5,16 @@ import numpy as np
 import layoutparser as lp
 from tqdm import tqdm
 import sys
+import logging
+
+# === Set logging to only show errors ===
+logging.getLogger().setLevel(logging.ERROR)
+
+# === Add MEDIS banner ===
+sys.path.append("/cluster/home/gw/MATRIX/regex_variants/segement/Matrix_reper/pdf_mat/PDF2MD")
+from MEDIS import LLMBannerPrinter
+banner = LLMBannerPrinter(word="====//MEDIS LAB//====")
+banner.print()
 
 sys.path.append("/cluster/home/gw/MATRIX/regex_variants/segement/Matrix_reper/pdf_mat/sege")
 from seg_processer import SegmentProcessor
@@ -131,17 +141,17 @@ class PDFToMarkdown:
                     all_markdown_lines.append(markdown_block)
 
                 except Exception as e:
-                    print(f"⚠️ OCR failed on {seg_name}: {e}")
+                    print(f"\u26a0\ufe0f OCR failed on {seg_name}: {e}")
 
         with open(self.markdown_path, "w", encoding="utf-8") as f:
             f.write("\n\n".join(all_markdown_lines))
 
-        print(f"✅ All segment images saved to: {self.segment_output_dir}")
-        print(f"✅ All OCR texts saved to: {self.text_output_dir}")
-        print(f"✅ Sorted text files saved to: {self.txt_folder}")
-        print(f"✅ Images saved to: {self.img_folder}")
-        print(f"✅ Text raw files saved to: {self.text_raw_folder}")
-        print(f"✅ Markdown file saved to: {self.markdown_path}")
+        print(f"\u2705 All segment images saved to: {self.segment_output_dir}")
+        print(f"\u2705 All OCR texts saved to: {self.text_output_dir}")
+        print(f"\u2705 Sorted text files saved to: {self.txt_folder}")
+        print(f"\u2705 Images saved to: {self.img_folder}")
+        print(f"\u2705 Text raw files saved to: {self.text_raw_folder}")
+        print(f"\u2705 Markdown file saved to: {self.markdown_path}")
 
     def process_all_pdfs(self):
         pdf_paths = self.get_all_pdf_paths(self.pdf_path)
@@ -149,7 +159,7 @@ class PDFToMarkdown:
         for pdf_file_path in tqdm(pdf_paths, desc="Batch processing PDFs"):
             try:
                 pdf_name = os.path.splitext(os.path.basename(pdf_file_path))[0]
-                print(f"\n📄 Processing: {pdf_file_path}")
+                print(f"\n\ud83d\udcc4 Processing: {pdf_file_path}")
                 pdf2md = PDFToMarkdown(
                     pdf_file_path,
                     self.output_base_dir,

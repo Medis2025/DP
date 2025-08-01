@@ -8,6 +8,11 @@ import sys
 
 sys.path.append("/cluster/home/gw/MATRIX/regex_variants/segement/Matrix_reper/pdf_mat/sege")
 from seg_processer import SegmentProcessor
+# === Add MEDIS banner ===
+sys.path.append("/cluster/home/gw/MATRIX/regex_variants/segement/Matrix_reper/pdf_mat/PDF2MD")
+from MEDIS import LLMBannerPrinter
+banner = LLMBannerPrinter(word="====//MEDIS LAB//====")
+banner.print()
 
 class PDFToMarkdown:
     def __init__(self, pdf_path, output_base_dir, layout_model=None, create_dirs=True, batch_process=False):
