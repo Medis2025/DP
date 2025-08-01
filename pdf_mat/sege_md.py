@@ -76,7 +76,7 @@ class PDFToMarkdown:
                 img_output_path = os.path.join(self.img_folder, f"{seg_name}.png")
                 text_raw_path = os.path.join(self.text_raw_folder, f"{seg_name}.txt")
 
-                cv2.imwrite(seg_img_path, segment)
+                cv2.imwrite(seg_img_path, cv2.cvtColor(segment, cv2.COLOR_RGB2BGR))
 
                 try:
                     ocr_result = self.ocr.predict(segment)
@@ -98,7 +98,7 @@ class PDFToMarkdown:
                         with open(text_raw_path, "w", encoding="utf-8") as f:
                             f.write("\n".join(texts))
                     elif block_type == "figure":
-                        cv2.imwrite(img_output_path, segment)
+                        cv2.imwrite(img_output_path, cv2.cvtColor(segment, cv2.COLOR_RGB2BGR))
                         rel_img_path = os.path.relpath(img_output_path, self.segment_output_dir)
                         markdown_block = f"![{seg_name}]({rel_img_path})\n"
                     else:

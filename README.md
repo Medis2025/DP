@@ -113,6 +113,19 @@ output/
 
 ---
 
+
+## Output example
+
+### It can label on top of the original pdf 
+
+![alt text](demo_output/IMG/image.png)
+
+![alt text](demo_output/IMG/image-1.png)
+
+![alt text](demo_output/IMG/image-2.png)
+### Or transfer to markdown
+
+
 ## Performance
 
 On a typical academic corpus of biomedical PDFs:
