@@ -1,0 +1,43 @@
+# === Padding & Offset Configuration ===
+Block:
+  padding: 500
+
+  offsets:
+    title: 10
+    table: 5
+    figure: 5
+    text: 3
+
+  overlap_threshold : 0.2
+
+# === paddleOCR Configuration ===
+paddleocr:
+  lang: "en"
+  use_doc_orientation_classify: true
+  use_doc_unwarping: true
+  use_textline_orientation: False
+  text_det_unclip_ratio: 1.0
+  text_det_box_thresh: 0.5
+  text_rec_score_thresh: 0.5
+
+
+dococr:
+  det_arch: "db_resnet50"
+  reco_arch: "crnn_vgg16_bn"
+  conf_threshold: 0.6
+  add_score: true
+
+
+detectron:
+  config_path: "/cluster/home/gw/detectron2/config.yml"
+  model_path: "/cluster/home/gw/detectron2/layout_weights.pth"
+  label_map:
+    0: text
+    1: title
+    2: list
+    3: table
+    4: figure
+  extra_config:
+    - "MODEL.ROI_HEADS.SCORE_THRESH_TEST"
+    - 0.3
+  device: "cuda"
